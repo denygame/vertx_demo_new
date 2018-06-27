@@ -1,0 +1,12 @@
+io\vertx\demo\rxjava\web\client\simple\Client.class
+io\vertx\demo\rxjava\web\client\zip\Client.class
+io\vertx\demo\service\discovery\ServerServiceDiscovery.class
+io\vertx\demo\web\WebVerticle.class
+io\vertx\demo\rxjava\web\ReadStream.class
+io\vertx\demo\web\webclient\WebClientVerticle.class
+io\vertx\demo\rxjava\web\client\simple\Server.class
+io\vertx\demo\data\mongodb\ServerMongo.class
+io\vertx\demo\mqtt\ClientMqtt.class
+io\vertx\demo\rxjava\web\Web.class
+io\vertx\demo\mqtt\ServerMqtt.class
+io\vertx\demo\rxjava\web\client\zip\Server.class
