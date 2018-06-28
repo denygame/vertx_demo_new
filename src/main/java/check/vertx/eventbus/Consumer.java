@@ -14,8 +14,13 @@ public class Consumer extends AbstractVerticle {
 		
 		vertx.eventBus().consumer("ex", message -> {
 			JsonObject messageBody = (JsonObject) message.body();
-//			messageBody.clear();
 			messageBody.put("ex", true);
+			message.reply(messageBody);
+		});
+		
+		vertx.eventBus().consumer("cls", message->{
+			JsonObject messageBody = (JsonObject) message.body();
+			messageBody.clear();
 			message.reply(messageBody);
 		});
 	}

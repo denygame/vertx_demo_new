@@ -1,0 +1,17 @@
+Reactive programming is programming with asynchronous data streams
+
+
+
+============= What is an Eventbus?
+An Eventbus is a mechanism that allows different components to communicate with each other without knowing about each other. A component can send an Event to the Eventbus without knowing who will pick it up or how many others will pick it up. Components can also listen to Events on an Eventbus, without knowing who sent the Events. That way, components can communicate without depending on each other. Also, it is very easy to substitute a component. As long as the new component understands the Events that are being sent and received, the other components will never know.
+
+So what exactly is a component here? Well, a component could be anything. In most Eventbuses, they are Java Objects. They send Events and they also listen to Events.
+
+And Events, what are they? Well, they are basically the messages that get sent and received by the components. Typically, they contain everything that the receiver needs to know in order to process the Event.
+
+Everything else about Eventbuses is pretty much implementation dependent. Typically, Java Eventbuses require the sender of an Event to create an Event Object, which can be filled with data for the receiver. The sender then calls eventbus.send(event). The receiver has to implement a certain interface with an onEvent(Event e) method, that gets called by the Eventbus. Most Eventbuses therefore only support one-way communication. RRiBbit however, does not require the overhead of having Event Objects or onEvent() methods and supports two way communication, meaning that the receiver can actually send something back to the sender.
+
+============= When are Eventbuses useful?
+Eventbuses are useful when you don't want components to depend on each other. Instead of a component having many references to other components, it can just send Events to an Eventbus and does not have to worry about who will take care of them. This will make development and splitting up an application into independent parts a lot easier.
+
+Another reason to use Eventbuses is when you want to call components that run on another machine and you don't want to take care of the communication layer yourself. Eventbuses that support this, can take care of sending the Event to the other machine, where it will be picked up by a component that listens to it. 

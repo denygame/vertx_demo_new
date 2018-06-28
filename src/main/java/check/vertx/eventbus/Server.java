@@ -8,20 +8,26 @@ public class Server extends AbstractVerticle {
 
 	@Override
 	public void start() throws Exception {
-		vertx.createHttpServer().requestHandler(request -> {
-			messageBody = new JsonObject().put("web", "first");
+		this.messageBody = new JsonObject().put("web", "first");
 
-			vertx.eventBus().send("echo", messageBody, reply -> {
-				JsonObject echoMess = (JsonObject) reply.result().body();
-				messageBody = echoMess;
-				
-				vertx.eventBus().send("ex", messageBody, reply1 -> {
-					messageBody = (JsonObject) reply.result().body();
-					request.response().end(messageBody.encodePrettily());
-				});
+		vertx.eventBus().send("echo", this.messageBody, reply -> {
+			JsonObject echoMess = (JsonObject) reply.result().body();
+			this.messageBody = echoMess;
+			System.out.println(this.messageBody);
+
+			vertx.eventBus().send("ex", this.messageBody, reply1 -> {
+				this.messageBody = (JsonObject) reply1.result().body();
+				System.out.println(this.messageBody);
 			});
+		});
 
+		vertx.eventBus().send("cls", this.messageBody, reply -> {
+			this.messageBody = (JsonObject) reply.result().body();
+			System.out.println(this.messageBody);
+		});
 
-		}).listen(3214);
+		vertx.setTimer(10000, handler -> {
+			System.out.println(this.messageBody);
+		});
 	}
 }
